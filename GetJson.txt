@@ -15,5 +15,10 @@ using System.Threading.Tasks;namespace Huxley.Presentation.Integration.Tests.EFC
             property.Ignored = false;            return property;
         }
     }
-}            var jsonResolver = new PropertyRenameSerializerContractResolver();            var serializerSettings = new JsonSerializerSettings();
-            serializerSettings.ContractResolver = jsonResolver;            var jsonResult = JsonConvert.SerializeObject(actual, serializerSettings);
+}
+
+
+            var jsonResolver = new PropertyRenameSerializerContractResolver();
+            var serializerSettings = new JsonSerializerSettings();
+            serializerSettings.ContractResolver = jsonResolver;
+            var jsonResult = JsonConvert.SerializeObject(actual, serializerSettings);
