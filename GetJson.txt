@@ -1,0 +1,19 @@
+using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;namespace Huxley.Presentation.Integration.Tests.EFCore
+{
+    internal class PropertyRenameSerializerContractResolver: DefaultContractResolver
+    {
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        {
+            var property = base.CreateProperty(member, memberSerialization);
+            property.ShouldSerialize = i => true;
+            property.Ignored = false;            return property;
+        }
+    }
+}            var jsonResolver = new PropertyRenameSerializerContractResolver();            var serializerSettings = new JsonSerializerSettings();
+            serializerSettings.ContractResolver = jsonResolver;            var jsonResult = JsonConvert.SerializeObject(actual, serializerSettings);
